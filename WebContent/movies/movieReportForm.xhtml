@@ -10,7 +10,24 @@
 <h:head>
 </h:head>
 <h:body>
-	<h1>Lista de Peliculas</h1>
+	<h:form>
+		<p:tabMenu activeIndex="#{param.i}"
+			style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
+			<p:menuitem value="Registro Peliculas" outcome="/movies/movieForm"
+				icon="ui-icon-star">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Peliculas - Imagenes"
+				outcome="/movies/movieListForm" icon="ui-icon-image">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Reporte" outcome="/movies/movieReportForm"
+				icon="ui-icon-document">
+				<f:param name="i" value="2" />
+			</p:menuitem>
+
+		</p:tabMenu>
+	</h:form>
 
 	<h:form id="movieDetailList">
 		<p:growl id="msgs" showDetail="true" />
@@ -19,18 +36,19 @@
 			selectionMode="single" selection="#{movieController.selectedMovie}"
 			rowKey="#{movie.id}"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-			paginator="true" rows="10" style="margin-bottom:20px">
+			paginator="true" rows="10"
+			style=" margin-bottom:20px; font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
 			<p:ajax event="rowSelect" listener="#{movieController.onRowSelect}"
 				immediate="true" />
 
 			<f:facet name="{Exporters}">
 				<h:commandLink>
-					<p:graphicImage name="/demo/images/excel.png" width="24" />
+					<p:graphicImage name="/image/pdf.jpg" width="24" />
 					<p:dataExporter type="xls" target="tbl" fileName="movies" />
 				</h:commandLink>
 
 				<h:commandLink>
-					<p:graphicImage name="/demo/images/pdf.png" width="24" />
+					<p:graphicImage name="/image/pdf.jpg" width="24" />
 					<p:dataExporter type="pdf" target="tbl" fileName="movies" />
 				</h:commandLink>
 
@@ -51,6 +69,12 @@
 				<h:outputText value="#{movie.description}" />
 			</p:column>
 
+			<p:column headerText="Imagenes">
+				<ui:repeat value="#{movie.moviePictures}" var="movie">
+					    #{movie.name}<br />
+				</ui:repeat>
+			</p:column>
+			
 			<p:rowExpansion>
 				<p:panelGrid columns="2" columnClasses="label,value"
 					style="width:300px">

@@ -10,14 +10,30 @@
 <h:head>
 </h:head>
 <h:body>
-	<h1>Lista de Peliculas</h1>
+	<h:form>
+		<p:tabMenu activeIndex="#{param.i}" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
+			<p:menuitem value="Registro Peliculas" outcome="/movies/movieForm"
+				icon="ui-icon-star">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Peliculas - Imagenes"
+				outcome="/movies/movieListForm" icon="ui-icon-image">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Reporte" outcome="/movies/movieReportForm"
+				icon= "ui-icon-document">
+				<f:param name="i" value="2" />
+			</p:menuitem>
+
+		</p:tabMenu>
+	</h:form>
 
 	<h:form id="movieList">
 		<p:growl id="msgs" showDetail="true" />
 
 		<p:dataTable var="movie" value="#{movieController.movieList}"
 			selectionMode="single" selection="#{movieController.selectedMovie}"
-			rowKey="#{movie.id}">
+			rowKey="#{movie.id}" style=" margin-bottom:20px; font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
 			<p:ajax event="rowSelect" listener="#{movieController.onRowSelect}"
 				immediate="true" />
 

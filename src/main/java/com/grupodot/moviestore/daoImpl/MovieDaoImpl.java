@@ -3,6 +3,7 @@ package com.grupodot.moviestore.daoImpl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,12 @@ public class MovieDaoImpl implements MovieDao {
 	public List<Movie> queryAllMovies() {
 		return this.sessionFactory.getCurrentSession().createCriteria(Movie.class).list();
 	}
+	
+	public Movie queryMovieById(Integer id){
+		return (Movie) this.sessionFactory.getCurrentSession()
+				.createCriteria(Movie.class).add(Restrictions.eq("id", id)).uniqueResult();
+				
+	}
+	
 
 }

@@ -9,5 +9,7 @@ public interface MovieDao {
 	public void saveMovie(Movie movie);
 	
 	public List<Movie> queryAllMovies();
+	
+	public Movie queryMovieById(Integer id);
 
 }

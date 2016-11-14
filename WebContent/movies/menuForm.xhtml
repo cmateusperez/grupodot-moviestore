@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:tabMenu activeIndex="#{param.i}" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
+			<p:menuitem value="Registro Peliculas" outcome="/movies/movieForm" 
+				icon="ui-icon-star">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Peliculas - Imagenes"
+				outcome="/movies/movieListForm" icon="ui-icon-image">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Reporte" outcome="/movies/movieReportForm"
+				icon= "ui-icon-document">
+				<f:param name="i" value="2" />
+			</p:menuitem>	
+		</p:tabMenu>
+	</h:form>
+</h:body>
+</html>

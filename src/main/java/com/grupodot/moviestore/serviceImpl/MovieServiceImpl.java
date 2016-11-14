@@ -31,9 +31,16 @@ public class MovieServiceImpl implements MovieService {
 		return movieDao.queryAllMovies();
 	}
 	
+	@Transactional
 	public void queryMovieWithPicture(Movie movie){
 		List<MoviePicture> moviePictures = moviePictureService.queryAllMoviePicture(movie.getId());
 		movie.setMoviePictures(moviePictures);
+	}
+	
+	@Transactional
+	public Movie queryMovieById(Integer id){
+		return null;
+	
 	}
 	
 

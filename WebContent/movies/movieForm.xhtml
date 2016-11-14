@@ -10,23 +10,47 @@
 <h:head>
 </h:head>
 <h:body>
-	<h1>Registro de Peliculas</h1>
+	<h:form>
+
+		<p:tabMenu activeIndex="#{param.i}" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
+
+			<p:menuitem value="Registro Peliculas" outcome="/movies/movieForm"
+				icon="ui-icon-star">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Peliculas - Imagenes"
+				outcome="/movies/movieListForm" icon="ui-icon-image">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Reporte" outcome="/movies/movieReportForm"
+				icon= "ui-icon-document">
+				<f:param name="i" value="2" />
+			</p:menuitem>
+
+		</p:tabMenu>
+	</h:form>
 
 	<h:form>
+
 		<p:growl id="msgs" showDetail="true" />
-		
-		<h:panelGrid columns="2" cellpadding="5">
-			<p:outputLabel value="Codigo:" for="codigoTxt" />
-			<p:inputText id="codigoTxt" value="#{movieController.movie.code}"/>
-			
-		    <p:outputLabel value="Nombre:" for="nombreTxt" />
-			<p:inputText id="nombreTxt" value="#{movieController.movie.name}"/>
-			
-			<p:outputLabel value="Descripcion:" for="descripcionTxt" />
-			<p:inputText id="descripcionTxt" value="#{movieController.movie.description}"/>
+
+		<h:panelGrid columns="2" cellpadding="10">
+
+			<p:outputLabel value="Codigo:" for="codigoTxt" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; " />
+			<p:inputText id="codigoTxt" value="#{movieController.movie.code}" />
+
+			<p:outputLabel value="Nombre:" for="nombreTxt" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; "/>
+			<p:inputText id="nombreTxt" value="#{movieController.movie.name}" />
+
+			<p:outputLabel value="Descripcion:" for="descripcionTxt" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; "/>
+			<p:inputText id="descripcionTxt"
+				value="#{movieController.movie.description}" />
+
+			<p:commandButton value="Guardar" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; "
+				actionListener="#{movieController.saveMovie}" />
 		</h:panelGrid>
 
-		<p:commandButton value="Guardar"  actionListener="#{movieController.saveMovie}"/>
+
 
 	</h:form>
 </h:body>
