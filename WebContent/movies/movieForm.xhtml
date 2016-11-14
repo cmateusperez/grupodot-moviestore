@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>Registro de Peliculas</h1>
+
+	<h:form>
+		<p:growl id="msgs" showDetail="true" />
+		
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel value="Codigo:" for="codigoTxt" />
+			<p:inputText id="codigoTxt" value="#{movieController.movie.code}"/>
+			
+		    <p:outputLabel value="Nombre:" for="nombreTxt" />
+			<p:inputText id="nombreTxt" value="#{movieController.movie.name}"/>
+			
+			<p:outputLabel value="Descripcion:" for="descripcionTxt" />
+			<p:inputText id="descripcionTxt" value="#{movieController.movie.description}"/>
+		</h:panelGrid>
+
+		<p:commandButton value="Guardar"  actionListener="#{movieController.saveMovie}"/>
+
+	</h:form>
+</h:body>
+</html>

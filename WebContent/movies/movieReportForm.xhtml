@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>Lista de Peliculas</h1>
+
+	<h:form id="movieDetailList">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="tbl" var="movie" value="#{movieController.movieList}"
+			selectionMode="single" selection="#{movieController.selectedMovie}"
+			rowKey="#{movie.id}"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+			paginator="true" rows="10" style="margin-bottom:20px">
+			<p:ajax event="rowSelect" listener="#{movieController.onRowSelect}"
+				immediate="true" />
+
+			<f:facet name="{Exporters}">
+				<h:commandLink>
+					<p:graphicImage name="/demo/images/excel.png" width="24" />
+					<p:dataExporter type="xls" target="tbl" fileName="movies" />
+				</h:commandLink>
+
+				<h:commandLink>
+					<p:graphicImage name="/demo/images/pdf.png" width="24" />
+					<p:dataExporter type="pdf" target="tbl" fileName="movies" />
+				</h:commandLink>
+
+			</f:facet>
+			<p:column style="width:16px">
+				<p:rowToggler />
+			</p:column>
+
+			<p:column headerText="Código">
+				<h:outputText value="#{movie.code}" />
+			</p:column>
+
+			<p:column headerText="Nombre">
+				<h:outputText value="#{movie.name}" />
+			</p:column>
+
+			<p:column headerText="Descripción">
+				<h:outputText value="#{movie.description}" />
+			</p:column>
+
+			<p:rowExpansion>
+				<p:panelGrid columns="2" columnClasses="label,value"
+					style="width:300px">
+					<p:galleria value="#{movieController.selectedMovie.moviePictures}"
+						var="image" panelWidth="500" panelHeight="313" showCaption="true">
+						<p:graphicImage name="demo/images/nature/#{image}"
+							alt="Image Description for #{image}" title="#{image}" />
+					</p:galleria>
+				</p:panelGrid>
+			</p:rowExpansion>
+
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

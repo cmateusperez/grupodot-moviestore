@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h1>Lista de Peliculas</h1>
+
+	<h:form id="movieList">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable var="movie" value="#{movieController.movieList}"
+			selectionMode="single" selection="#{movieController.selectedMovie}"
+			rowKey="#{movie.id}">
+			<p:ajax event="rowSelect" listener="#{movieController.onRowSelect}"
+				immediate="true" />
+
+			<p:column headerText="Nombre">
+				<h:outputText value="#{movie.name}" />
+			</p:column>
+
+			<p:column headerText="Carga">
+				<p:fileUpload
+					fileUploadListener="#{movieController.saveMoviePicture}"
+					mode="advanced" dragDropSupport="false" sizeLimit="100000"
+					fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+				</p:fileUpload>
+			</p:column>
+
+			<p:column headerText="Mostrar">
+				<p:commandButton oncomplete="PF('moviePictureDialog').show()"
+					icon="ui-icon-search" title="View">
+					<f:setPropertyActionListener value="#{movie}"
+						target="#{movieController.selectedMovie}" />
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+		<p:dialog header="Movie Picture" widgetVar="moviePictureDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+
+			<p:imageSwitch effect="fade" id="fadeEffect">
+				<ui:repeat value="#{movieController.images}" var="image"
+					id="fadeEffectImages">
+					<p:graphicImage name="/image/#{image}" id="image" />
+				</ui:repeat>
+			</p:imageSwitch>
+
+		</p:dialog>
+
+	</h:form>
+</h:body>
+</html>
