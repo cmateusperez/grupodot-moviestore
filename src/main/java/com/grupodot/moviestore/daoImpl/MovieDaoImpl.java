@@ -16,7 +16,6 @@ public class MovieDaoImpl implements MovieDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
 	public void saveMovie(Movie movie) {
 		this.sessionFactory.getCurrentSession().saveOrUpdate(movie);
 	}

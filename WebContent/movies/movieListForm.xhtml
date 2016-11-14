@@ -9,6 +9,34 @@
 
 <h:head>
 </h:head>
+<style>
+/* hide the icons in the file upload button bar */
+.ui-fileupload-buttonbar .ui-icon {
+	display: none;
+}
+
+/* adjust the padding of all buttons inside the file upload button bar */
+.ui-fileupload-buttonbar .ui-button-text-icon-left .ui-button-text {
+	font-size: 0.8em;
+	padding: 0 0.2em;
+}
+
+/* unstyle the file upload button bar background */
+.ui-fileupload-buttonbar.ui-widget-header {
+	background-color: transparent;
+	border: 0 none;
+}
+
+/* increase fileupload button spacing between 'choose' and 'upload' */
+.ui-fileupload-buttonbar .ui-fileupload-choose {
+	margin-right: 2em;
+}
+
+/* remove the border of file upload content list */
+.ui-fileupload-content {
+	border: 0 none;
+}
+</style>
 <h:body>
 	<h:form>
 		<p:tabMenu activeIndex="#{param.i}" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
@@ -45,30 +73,40 @@
 				<p:fileUpload
 					fileUploadListener="#{movieController.saveMoviePicture}"
 					mode="advanced" dragDropSupport="false" sizeLimit="100000"
-					fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+					fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+					skinSimple="true" style="height:30px; width:120px" auto="true">
 				</p:fileUpload>
 			</p:column>
 
 			<p:column headerText="Mostrar">
-				<p:commandButton oncomplete="PF('moviePictureDialog').show()"
-					icon="ui-icon-search" title="View">
-					<f:setPropertyActionListener value="#{movie}"
-						target="#{movieController.selectedMovie}" />
-				</p:commandButton>
+				<p:outputPanel layout="grid">
+					<p:commandButton oncomplete="PF('moviePictureDialog').show()"
+						update=":movieList:imagenes" icon="ui-icon-search" title="View">
+						<f:setPropertyActionListener value="#{movie}"
+							target="#{movieController.selectedMovie}" />
+					</p:commandButton>
+				</p:outputPanel>
 			</p:column>
 
 		</p:dataTable>
 
 		<p:dialog header="Movie Picture" widgetVar="moviePictureDialog"
-			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-
-			<p:imageSwitch effect="fade" id="fadeEffect">
-				<ui:repeat value="#{movieController.images}" var="image"
-					id="fadeEffectImages">
-					<p:graphicImage name="/image/#{image}" id="image" />
-				</ui:repeat>
-			</p:imageSwitch>
-
+			modal="true" showEffect="fade" hideEffect="fade" resizable="true">
+			<p:outputPanel id="imagenes">
+				<p:commandButton type="button" onclick="PF('switcher').previous();"
+					icon="ui-icon-circle-triangle-w" id="prev" />
+				<p:commandButton type="button" onclick="PF('switcher').next();"
+					icon="ui-icon-circle-triangle-e" id="next" />
+				<p:imageSwitch effect="wipe" widgetVar="switcher"
+					id="manuelSwitcher" slideshowAuto="false">
+					<ui:repeat value="#{movieController.selectedMovie.moviePictures}"
+						var="image" id="fadeEffectImages">
+						<p:graphicImage value="#{movieController.imageFromDB}">
+							<f:param name="pictureId" value="#{image.pictureId}" />
+						</p:graphicImage>
+					</ui:repeat>
+				</p:imageSwitch>
+			</p:outputPanel>
 		</p:dialog>
 
 	</h:form>

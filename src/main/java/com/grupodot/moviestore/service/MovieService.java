@@ -15,4 +15,5 @@ public interface MovieService {
 	
 	public Movie queryMovieById(Integer id);
 
+
 }

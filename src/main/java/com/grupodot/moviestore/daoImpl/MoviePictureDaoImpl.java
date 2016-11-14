@@ -16,7 +16,6 @@ public class MoviePictureDaoImpl implements MoviePictureDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
 	public void saveMoviePicture(MoviePicture moviePicture) {
 		// TODO Auto-generated method stub
 	}
@@ -27,5 +26,12 @@ public class MoviePictureDaoImpl implements MoviePictureDao {
 				.createCriteria(MoviePicture.class)
 				.add(Restrictions.eq("movie.id", movieId)).list();
 	}
+	
+	public MoviePicture querybyID(Integer pictuareId) {
+		return (MoviePicture) this.sessionFactory.getCurrentSession()
+				.createCriteria(MoviePicture.class)
+				.add(Restrictions.eq("pictureId", pictuareId)).uniqueResult();
+	}
+
 
 }
