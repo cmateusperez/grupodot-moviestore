@@ -25,6 +25,11 @@ public class MoviePictureServiceImpl implements MoviePictureService {
 	public List<MoviePicture> queryAllMoviePicture(Integer movieId) {
 		return moviePictureDao.queryAllMoviePicture(movieId);
 	}
+
+	@Transactional
+	public MoviePicture querybyID(Integer pictuareId) {
+		return moviePictureDao.querybyID(pictuareId);
+	}
 	
 
 }

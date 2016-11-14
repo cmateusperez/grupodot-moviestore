@@ -10,5 +10,8 @@ public interface MoviePictureService {
 	public void saveMoviePicture(MoviePicture moviePicture);
 	
 	public List<MoviePicture> queryAllMoviePicture(Integer movieId);
+	
+	public MoviePicture querybyID(Integer pictuareId);
+
 
 }

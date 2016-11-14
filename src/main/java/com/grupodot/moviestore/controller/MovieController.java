@@ -1,15 +1,20 @@
 package com.grupodot.moviestore.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.grupodot.moviestore.entities.Movie;
@@ -18,7 +23,8 @@ import com.grupodot.moviestore.service.MoviePictureService;
 import com.grupodot.moviestore.service.MovieService;
 
 @Controller
-public class MovieController implements Serializable{
+@Scope("session")
+public class MovieController implements Serializable {
 
 	/**
 	 * 
@@ -40,18 +46,15 @@ public class MovieController implements Serializable{
 	private UploadedFile file;
 
 	private Movie selectedMovie;
-	
-	private List<String> images = new ArrayList<String>();
+
 
 	@PostConstruct
 	public void initMovieController() {
 		setMovieList(movieService.queryAllMovies());
-		for(Movie movie: movieList){
+		for (Movie movie : movieList) {
 			movieService.queryMovieWithPicture(movie);
 		}
-		
-		images.add("Chrysanthemun.jpg");
-		images.add("Desert.jpg");
+		selectedMovie = movieList.get(0);
 	}
 
 	public Movie getMovie() {
@@ -97,17 +100,7 @@ public class MovieController implements Serializable{
 	public void saveMovie() {
 		movieService.saveMovie(movie);
 	}
-	
 
-	public List<String> getImages() {
-		return images;
-	}
-
-	public void setImages(List<String> images) {
-		this.images = images;
-	}
-	
-	
 
 	public void saveMoviePicture(FileUploadEvent event) {
 		moviePicture = new MoviePicture();
@@ -123,15 +116,27 @@ public class MovieController implements Serializable{
 	public void onRowSelect(SelectEvent event) {
 		this.selectedMovie = (Movie) event.getObject();
 	}
-	
-	
 
 	public void showMovie() {
 		moviePictureService.queryAllMoviePicture(selectedMovie.getId());
 
 	}
-	
 
+
+	public StreamedContent getImageFromDB() {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+			return new DefaultStreamedContent();
+		} else {
+
+			String pictureId = context.getExternalContext().getRequestParameterMap().get("pictureId");
+			MoviePicture picture = moviePictureService.querybyID(new Integer(pictureId));
+
+			return new DefaultStreamedContent(new ByteArrayInputStream(picture.getData()), picture.getMimeType());
+
+		}
+	}
 
 
 }
