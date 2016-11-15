@@ -39,8 +39,16 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Transactional
 	public Movie queryMovieById(Integer id){
-		return null;
+		Movie movie = movieDao.queryMovieById(id);
+		queryMovieWithPicture(movie);
+		return movie;
 	
+	}
+	@Transactional
+	public List<Movie> queryMovieByName(String name) {
+		return movieDao.queryMovieByName(name);
+
+		
 	}
 	
 
