@@ -48,12 +48,12 @@
 
 			<f:facet name="{Exporters}">
 				<h:commandLink>
-					<p:graphicImage value="/image/pdf.jpg" width="23" />
+					<p:graphicImage value="/image/excel.png" width="23" />
 					<p:dataExporter type="xls" target="tbl" fileName="movies" />
 				</h:commandLink>
 
 				<h:commandLink>
-					<p:graphicImage value="/image/excel.png" width="24" />
+					<p:graphicImage value="/image/pdf.jpg" width="24" />
 					<p:dataExporter type="pdf" target="tbl" fileName="movies" />
 				</h:commandLink>
 			</f:facet>
@@ -62,15 +62,15 @@
 				<p:rowToggler />
 			</p:column>
 
-			<p:column headerText="Código">
+			<p:column headerText="CODIGO">
 				<h:outputText value="#{movie.code}" />
 			</p:column>
 
-			<p:column headerText="Nombre">
+			<p:column headerText="NOMBRE">
 				<h:outputText value="#{movie.name}" />
 			</p:column>
 
-			<p:column headerText="Descripción">
+			<p:column headerText="DESCRIPCION">
 				<h:outputText value="#{movie.description}" />
 			</p:column>
 
@@ -84,7 +84,7 @@
 						id="manuelSwitcher" slideshowAuto="false">
 						<ui:repeat value="#{movie.moviePictures}"
 							var="image" id="fadeEffectImages">
-							<p:graphicImage value="#{movieController.imageFromDB}" width="120" height="120">
+							<p:graphicImage value="#{movieController.imageFromDB}" >
 								<f:param name="pictureId" value="#{image.pictureId}" />
 							</p:graphicImage>
 						</ui:repeat>
