@@ -14,6 +14,8 @@ public interface MovieService {
 	public void queryMovieWithPicture(Movie movie);
 	
 	public Movie queryMovieById(Integer id);
+	
+	public List<Movie> queryMovieByName(String name);
 
 
 }
