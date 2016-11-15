@@ -99,6 +99,7 @@ public class MovieController{
 		FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Creación exitosa"));
 		movieService.saveMovie(movie);
+		movie = new Movie();
 	}
 
 

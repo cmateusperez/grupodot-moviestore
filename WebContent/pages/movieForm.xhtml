@@ -36,19 +36,19 @@
 	
 	<p:spacer height="20" />
 
-	<h:form>
+	<h:form id="movieForm">
 
-		<p:growl id="msgs" showDetail="true" />
+		<p:messages autoUpdate="true"/>
 
 		<h:panelGrid columns="2" cellpadding="10">
 
 			<p:outputLabel value="CODIGO:" for="codigoTxt"
 				style="font-family: Arial, sans-serif; font-size: 12px; color: #76747c; " />
-			<p:inputText id="codigoTxt" value="#{movieController.movie.code}" />
+			<p:inputText id="codigoTxt" value="#{movieController.movie.code}" required="true"/>
 
 			<p:outputLabel value="NOMBRE:" for="nombreTxt"
 				style="font-family: Arial, sans-serif; font-size: 12px; color: #76747c; " />
-			<p:inputText id="nombreTxt" value="#{movieController.movie.name}" />
+			<p:inputText id="nombreTxt" value="#{movieController.movie.name}" required="true" />
 
 			<p:outputLabel value="DESCRIPCION:" for="descripcionTxt"
 				style="font-family: Arial, sans-serif; font-size: 12px; color: #76747c; " />
@@ -57,7 +57,7 @@
 
 			<p:commandButton value="Guardar"
 				style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; "
-				actionListener="#{movieController.saveMovie}" />
+				actionListener="#{movieController.saveMovie}" validateClient="true" update=":movieForm"/>
 
 		</h:panelGrid>
 
