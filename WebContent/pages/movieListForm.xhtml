@@ -8,6 +8,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<img
+		src="http://www.grupodot.com/wp-content/uploads/2015/05/GrupoDot.png"
+		alt="grupoDot" />
 </h:head>
 <style>
 /* hide the icons in the file upload button bar */
@@ -39,6 +42,7 @@
 </style>
 
 <h:body>
+	<p:spacer height="20" />
 	<h:form>
 		<p:tabMenu activeIndex="#{param.i}"
 			style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
@@ -57,6 +61,8 @@
 
 		</p:tabMenu>
 	</h:form>
+
+	<p:spacer height="20" />
 
 	<h:form id="movieList">
 		<p:growl id="msgs" showDetail="true" />
