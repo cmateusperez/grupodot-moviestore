@@ -37,19 +37,21 @@
 	border: 0 none;
 }
 </style>
+
 <h:body>
 	<h:form>
-		<p:tabMenu activeIndex="#{param.i}" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
-			<p:menuitem value="Registro Peliculas" outcome="/movies/movieForm"
+		<p:tabMenu activeIndex="#{param.i}"
+			style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
+			<p:menuitem value="Registro Peliculas" outcome="/pages/movieForm"
 				icon="ui-icon-star">
 				<f:param name="i" value="0" />
 			</p:menuitem>
 			<p:menuitem value="Peliculas - Imagenes"
-				outcome="/movies/movieListForm" icon="ui-icon-image">
+				outcome="/pages/movieListForm" icon="ui-icon-image">
 				<f:param name="i" value="1" />
 			</p:menuitem>
-			<p:menuitem value="Reporte" outcome="/movies/movieReportForm"
-				icon= "ui-icon-document">
+			<p:menuitem value="Reporte" outcome="/pages/movieReportForm"
+				icon="ui-icon-document">
 				<f:param name="i" value="2" />
 			</p:menuitem>
 
@@ -61,7 +63,8 @@
 
 		<p:dataTable var="movie" value="#{movieController.movieList}"
 			selectionMode="single" selection="#{movieController.selectedMovie}"
-			rowKey="#{movie.id}" style=" margin-bottom:20px; font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
+			rowKey="#{movie.id}"
+			style=" margin-bottom:20px; font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
 			<p:ajax event="rowSelect" listener="#{movieController.onRowSelect}"
 				immediate="true" />
 
@@ -72,9 +75,9 @@
 			<p:column headerText="Carga">
 				<p:fileUpload
 					fileUploadListener="#{movieController.saveMoviePicture}"
-					mode="advanced" dragDropSupport="false" sizeLimit="100000"
-					fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-					skinSimple="true" style="height:30px; width:120px" auto="true">
+					mode="advanced" dragDropSupport="false" fileLimit="3"
+					allowTypes="/(\.|\/)(gif|jpe?g|png)$/" skinSimple="true"
+					style="height:30px; width:120px" auto="true">
 				</p:fileUpload>
 			</p:column>
 

@@ -13,15 +13,15 @@
 	<h:form>
 		<p:tabMenu activeIndex="#{param.i}"
 			style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
-			<p:menuitem value="Registro Peliculas" outcome="/movies/movieForm"
+			<p:menuitem value="Registro Peliculas" outcome="/pages/movieForm"
 				icon="ui-icon-star">
 				<f:param name="i" value="0" />
 			</p:menuitem>
 			<p:menuitem value="Peliculas - Imagenes"
-				outcome="/movies/movieListForm" icon="ui-icon-image">
+				outcome="/pages/movieListForm" icon="ui-icon-image">
 				<f:param name="i" value="1" />
 			</p:menuitem>
-			<p:menuitem value="Reporte" outcome="/movies/movieReportForm"
+			<p:menuitem value="Reporte" outcome="/pages/movieReportForm"
 				icon="ui-icon-document">
 				<f:param name="i" value="2" />
 			</p:menuitem>
@@ -48,11 +48,11 @@
 				</h:commandLink>
 
 				<h:commandLink>
-					<p:graphicImage name="/image/pdf.jpg" width="24" />
+					<p:graphicImage name="/image/pdf.png" width="24" />
 					<p:dataExporter type="pdf" target="tbl" fileName="movies" />
 				</h:commandLink>
-
 			</f:facet>
+
 			<p:column style="width:16px">
 				<p:rowToggler />
 			</p:column>
@@ -69,21 +69,22 @@
 				<h:outputText value="#{movie.description}" />
 			</p:column>
 
-			<p:column headerText="Imagenes">
-				<ui:repeat value="#{movie.moviePictures}" var="movie">
-					    #{movie.name}<br />
-				</ui:repeat>
-			</p:column>
-			
 			<p:rowExpansion>
-				<p:panelGrid columns="2" columnClasses="label,value"
-					style="width:300px">
-					<p:galleria value="#{movieController.selectedMovie.moviePictures}"
-						var="image" panelWidth="500" panelHeight="313" showCaption="true">
-						<p:graphicImage name="demo/images/nature/#{image}"
-							alt="Image Description for #{image}" title="#{image}" />
-					</p:galleria>
-				</p:panelGrid>
+				<p:outputPanel id="imagenes">
+					<p:commandButton type="button" onclick="PF('switcher').previous();"
+						icon="ui-icon-circle-triangle-w" id="prev" />
+					<p:commandButton type="button" onclick="PF('switcher').next();"
+						icon="ui-icon-circle-triangle-e" id="next" />
+					<p:imageSwitch effect="wipe" widgetVar="switcher"
+						id="manuelSwitcher" slideshowAuto="false">
+						<ui:repeat value="#{movieController.selectedMovie.moviePictures}"
+							var="image" id="fadeEffectImages">
+							<p:graphicImage value="#{movieController.imageFromDB}">
+								<f:param name="pictureId" value="#{image.pictureId}" />
+							</p:graphicImage>
+						</ui:repeat>
+					</p:imageSwitch>
+				</p:outputPanel>
 			</p:rowExpansion>
 
 		</p:dataTable>

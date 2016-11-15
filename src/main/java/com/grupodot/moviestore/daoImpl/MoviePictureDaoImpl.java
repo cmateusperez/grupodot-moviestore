@@ -16,10 +16,6 @@ public class MoviePictureDaoImpl implements MoviePictureDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void saveMoviePicture(MoviePicture moviePicture) {
-		// TODO Auto-generated method stub
-	}
-
 	@SuppressWarnings("unchecked")
 	public List<MoviePicture> queryAllMoviePicture(Integer movieId) {
 		return this.sessionFactory.getCurrentSession()
@@ -31,6 +27,10 @@ public class MoviePictureDaoImpl implements MoviePictureDao {
 		return (MoviePicture) this.sessionFactory.getCurrentSession()
 				.createCriteria(MoviePicture.class)
 				.add(Restrictions.eq("pictureId", pictuareId)).uniqueResult();
+	}
+	
+	public void saveMoviePicture(MoviePicture moviePicture) {
+		// TODO Auto-generated method stub
 	}
 
 
