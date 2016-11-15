@@ -5,6 +5,8 @@
 	<artifactId>movieStore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<!-- Begin Dependencies JSF -->
+
 	<dependencies>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -29,6 +31,10 @@
 			<artifactId>jstl-api</artifactId>
 			<version>1.2</version>
 		</dependency>
+
+		<!-- End Dependencies JSF -->
+
+		<!-- Begin Dependencies Spring -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -66,6 +72,10 @@
 			<version>4.1.7.RELEASE</version>
 		</dependency>
 
+		<!-- End Dependencies Spring -->
+
+		<!-- Begin Dependencies Hibernate y PosgretSQL -->
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -90,6 +100,9 @@
 			<version>1.4</version>
 		</dependency>
 
+		<!-- End Dependencies Hibernate y PosgretSQL -->
+
+		<!-- Begin Dependencies Primefaces -->
 
 		<dependency>
 			<groupId>org.primefaces</groupId>
@@ -121,25 +134,22 @@
 			<version>9.0.1</version>
 		</dependency>
 
+		<!-- End Dependencies Primefaces -->
+
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>el-impl</artifactId>
 			<version>2.2.1-b05</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>4.1.7.RELEASE</version>
-		</dependency>
+		<!-- Begin Dependencies Jason -->
 		
-
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -158,5 +168,7 @@
 			<version>2.1</version>
 		</dependency>
 
+		<!-- End Dependencies Jason -->
+		
 	</dependencies>
 </project>

@@ -1,7 +1,6 @@
 package com.grupodot.moviestore.controller;
 
 import java.io.ByteArrayInputStream;
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,12 +23,7 @@ import com.grupodot.moviestore.service.MovieService;
 
 @Controller
 @Scope("session")
-public class MovieController implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class MovieController{
 
 	@Autowired
 	private MovieService movieService;
@@ -54,7 +48,7 @@ public class MovieController implements Serializable {
 		for (Movie movie : movieList) {
 			movieService.queryMovieWithPicture(movie);
 		}
-		selectedMovie = movieList.get(0);
+      selectedMovie = movieList.get(0);
 	}
 
 	public Movie getMovie() {
@@ -97,11 +91,18 @@ public class MovieController implements Serializable {
 		this.selectedMovie = selectedMovie;
 	}
 
+	/**
+	 * Save movie
+	 */
 	public void saveMovie() {
 		movieService.saveMovie(movie);
 	}
 
 
+	/**
+	 * Save movie image
+	 * @param event
+	 */
 	public void saveMoviePicture(FileUploadEvent event) {
 		moviePicture = new MoviePicture();
 		moviePicture.setData(event.getFile().getContents());
@@ -113,16 +114,10 @@ public class MovieController implements Serializable {
 		movieService.saveMovie(selectedMovie);
 	}
 
-	public void onRowSelect(SelectEvent event) {
-		this.selectedMovie = (Movie) event.getObject();
-	}
-
-	public void showMovie() {
-		moviePictureService.queryAllMoviePicture(selectedMovie.getId());
-
-	}
-
-
+	/**
+	 * Retrieve image by id from database
+	 * @return
+	 */
 	public StreamedContent getImageFromDB() {
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -134,9 +129,18 @@ public class MovieController implements Serializable {
 			MoviePicture picture = moviePictureService.querybyID(new Integer(pictureId));
 
 			return new DefaultStreamedContent(new ByteArrayInputStream(picture.getData()), picture.getMimeType());
-
 		}
 	}
+	
+	public void onRowSelect(SelectEvent event) {
+		this.selectedMovie = (Movie) event.getObject();
+	}
+
+	public void showMovie() {
+		moviePictureService.queryAllMoviePicture(selectedMovie.getId());
+
+	}
+
 
 
 }

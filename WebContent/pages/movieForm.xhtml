@@ -14,15 +14,15 @@
 
 		<p:tabMenu activeIndex="#{param.i}" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; ">
 
-			<p:menuitem value="Registro Peliculas" outcome="/movies/movieForm"
+			<p:menuitem value="Registro Peliculas" outcome="/pages/movieForm"
 				icon="ui-icon-star">
 				<f:param name="i" value="0" />
 			</p:menuitem>
 			<p:menuitem value="Peliculas - Imagenes"
-				outcome="/movies/movieListForm" icon="ui-icon-image">
+				outcome="/pages/movieListForm" icon="ui-icon-image">
 				<f:param name="i" value="1" />
 			</p:menuitem>
-			<p:menuitem value="Reporte" outcome="/movies/movieReportForm"
+			<p:menuitem value="Reporte" outcome="/pages/movieReportForm"
 				icon= "ui-icon-document">
 				<f:param name="i" value="2" />
 			</p:menuitem>
@@ -43,11 +43,12 @@
 			<p:inputText id="nombreTxt" value="#{movieController.movie.name}" />
 
 			<p:outputLabel value="Descripcion:" for="descripcionTxt" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; "/>
-			<p:inputText id="descripcionTxt"
+			<p:inputTextarea id="descripcionTxt"
 				value="#{movieController.movie.description}" />
 
 			<p:commandButton value="Guardar" style="font-family: Arial, sans-serif; font-size: 14px; color: #76747c; "
 				actionListener="#{movieController.saveMovie}" />
+
 		</h:panelGrid>
 
 
