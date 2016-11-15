@@ -8,6 +8,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<img
+		src="http://www.grupodot.com/wp-content/uploads/2015/05/GrupoDot.png"
+		alt="grupoDot" />
 </h:head>
 <h:body>
 	<h:form>
@@ -29,6 +32,8 @@
 		</p:tabMenu>
 	</h:form>
 
+	<p:spacer height="20" />
+
 	<h:form id="movieDetailList">
 		<p:growl id="msgs" showDetail="true" />
 
@@ -43,12 +48,12 @@
 
 			<f:facet name="{Exporters}">
 				<h:commandLink>
-					<p:graphicImage name="/image/pdf.jpg" width="24" />
+					<p:graphicImage value="/image/pdf.jpg" width="23" />
 					<p:dataExporter type="xls" target="tbl" fileName="movies" />
 				</h:commandLink>
 
 				<h:commandLink>
-					<p:graphicImage name="/image/pdf.png" width="24" />
+					<p:graphicImage value="/image/excel.png" width="24" />
 					<p:dataExporter type="pdf" target="tbl" fileName="movies" />
 				</h:commandLink>
 			</f:facet>
@@ -77,9 +82,9 @@
 						icon="ui-icon-circle-triangle-e" id="next" />
 					<p:imageSwitch effect="wipe" widgetVar="switcher"
 						id="manuelSwitcher" slideshowAuto="false">
-						<ui:repeat value="#{movieController.selectedMovie.moviePictures}"
+						<ui:repeat value="#{movie.moviePictures}"
 							var="image" id="fadeEffectImages">
-							<p:graphicImage value="#{movieController.imageFromDB}">
+							<p:graphicImage value="#{movieController.imageFromDB}" width="120" height="120">
 								<f:param name="pictureId" value="#{image.pictureId}" />
 							</p:graphicImage>
 						</ui:repeat>
