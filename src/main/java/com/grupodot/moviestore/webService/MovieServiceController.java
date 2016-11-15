@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.grupodot.moviestore.entities.Movie;
 import com.grupodot.moviestore.service.MovieService;
 
-
-
 @RestController
 public class MovieServiceController {
 	
@@ -26,7 +24,7 @@ public class MovieServiceController {
 	}
 	
 	@RequestMapping(value = "/addmovie", method = RequestMethod.POST, headers = "Accept=application/json")
-	public Movie addCountry(@RequestBody Movie movie) {
+	public Movie addMovie(@RequestBody Movie movie) {
 		movieService.saveMovie(movie);
 		return movie;
 	}

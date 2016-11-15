@@ -18,15 +18,12 @@
        <param-value>/WEB-INF/applicationContext.xml</param-value>
    </init-param>
    <load-on-startup>1</load-on-startup>
-
-</servlet>
+  </servlet>
    
    <servlet-mapping>
-    <servlet-name>springrest</servlet-name>
-    <url-pattern>/movieservices/*</url-pattern>
-</servlet-mapping>
-
- 
+    	<servlet-name>springrest</servlet-name>
+   		 <url-pattern>/movieservices/*</url-pattern>
+    </servlet-mapping>
    
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
